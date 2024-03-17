@@ -1,0 +1,36 @@
+---
+- name: Install Apache2, PHP, and MySQL
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Install PHP and its modules
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - php
+        - libapache2-mod-php
+        - php-mysql
+        - php-cli
+        - php-common
+        - php-json
+        - php-opcache
+        - php-mbstring
+        - php-zip
+        - php-gd
+        - php-curl
+
+    - name: Install MySQL server
+      apt:
+        name: mysql-server
+        state: present
+
