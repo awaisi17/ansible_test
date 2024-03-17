@@ -1,0 +1,13 @@
+---
+- name: Disable and stop UFW in Ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disable UFW
+      command: ufw disable
+
+    - name: Stop UFW service
+      service:
+        name: ufw
+        state: stopped
+
